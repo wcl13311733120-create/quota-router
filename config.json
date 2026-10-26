@@ -1,0 +1,45 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8090,
+    "strategy": "quota_aware"
+  },
+  "providers": [
+    {
+      "id": "deepseek-primary",
+      "name": "DeepSeek API (Primary)",
+      "base_url": "https://api.deepseek.com/v1",
+      "api_key": "sk-mock-deepseek-key",
+      "models": ["deepseek-chat", "deepseek-reasoner"],
+      "priority": 1,
+      "max_rpm": 60,
+      "max_tpm": 50000,
+      "cooldown_seconds": 30,
+      "is_active": true
+    },
+    {
+      "id": "kimi-secondary",
+      "name": "Moonshot Kimi (Secondary)",
+      "base_url": "https://api.moonshot.cn/v1",
+      "api_key": "sk-mock-kimi-key",
+      "models": ["moonshot-v1-8k", "kimi-k3.1-pro", "deepseek-chat"],
+      "priority": 2,
+      "max_rpm": 40,
+      "max_tpm": 30000,
+      "cooldown_seconds": 45,
+      "is_active": true
+    },
+    {
+      "id": "free-pool-fallback",
+      "name": "Community Free Model Pool (Fallback)",
+      "base_url": "http://127.0.0.1:8091/v1",
+      "api_key": "free-token",
+      "models": ["deepseek-chat", "flint-v1.0", "lfm-2.5-2.6b"],
+      "priority": 3,
+      "max_rpm": 20,
+      "max_tpm": 15000,
+      "cooldown_seconds": 15,
+      "is_active": true
+    }
+  ]
+}
